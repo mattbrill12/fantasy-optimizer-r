@@ -23,7 +23,7 @@ function() {
     group_by(visiting, season) %>%
     summarise(ratio = sum(win == 'W')/n())
 
-  x <- toJSON(dataSummary, pretty=TRUE)
+  x <- toJSON(dataSummary)
   return(x)
 }
 
@@ -42,5 +42,9 @@ function() {
   json_data <- fromJSON(paste(readLines(json_file), collapse=""))
   return(json_data)
 }
+
+
+
+print(c('api started'))
 
 
