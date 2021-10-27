@@ -1,69 +1,40 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+
 import './App.css';
-import { getSeason, getTeam } from './services/apiService';
-import { useEffect, useState } from 'react';
+import Optimizer from './components/optimizer/Optimizer';
+import Header from './components/header/Header';
+
 
 function App() {
 
+  const [key, setKey] = useState('dk');
 
   return (
     <div className="App">
+
       <Header />
-      <Chart />
+
+      <div className="container">
+        <Tabs
+          id="controlled-tab-example"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
+          className="mb-3"
+        >
+          <Tab eventKey="dk" title="Draft Kings">
+            <Optimizer type={'dk'} />
+          </Tab>
+          <Tab eventKey="runAvg" title="Running Avg">
+            <Optimizer type={'runAvg'} />
+          </Tab>
+        </Tabs>
+
+      </div>
+
     </div>
   );
 }
 
 export default App;
-
-function Header() {
-
-  let [header, setHeader] = useState([])
-
-  async function loadHeader() {
-    let resp = await getTeam('NYK');
-    setHeader(resp)
-  }
-
-  useEffect(() => {
-    loadHeader()
-  }, [])
-
-  return (
-    <h1>{header}</h1>
-  )
-}
-function Chart() {
-
-  let [winRatio, setWinRatio] = useState([])
-
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  async function loadData() {
-    let resp = await getSeason();
-    console.log(resp)
-    setWinRatio(resp)
-  }
-
-  return (
-    <>
-      <label>Home</label>
-      {
-        winRatio && winRatio.map((item, idx) => {
-          if (item.visiting === '1')
-            return <p key={idx}><b>{item.season}:</b> {item.ratio}</p>
-        })
-      }
-      <label>AWAY</label>
-      {
-        winRatio && winRatio.map((item, idx) => {
-          if (item.visiting === '0')
-            return <p key={idx}><b>{item.season}:</b> {item.ratio}</p>
-        })
-      }
-    </>
-  )
-}

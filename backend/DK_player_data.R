@@ -31,3 +31,4 @@ for(i in 1:length(draftables)){
 DK_DF = data.frame(LastName=LastName, FirstName = FirstName, Position = Position, Salary = Salary, Proj_Points = Proj_Points)
 
 DK_DF = unique(DK_DF)
+
