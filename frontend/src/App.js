@@ -21,7 +21,7 @@ function Header() {
   let [header, setHeader] = useState([])
 
   async function loadHeader() {
-    let resp = await getTeam('LAL');
+    let resp = await getTeam('NYK');
     setHeader(resp)
   }
 
