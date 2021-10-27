@@ -23,3 +23,4 @@ for(i in 1:length(draftables)){
   l[i] =  draftables[[i]]$firstName
 }
 l
+
