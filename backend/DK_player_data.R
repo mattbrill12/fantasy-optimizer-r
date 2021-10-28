@@ -49,14 +49,16 @@ Proj_Points = c()
 Team = c()
 
 for(i in 1:length(draftables)){
-  FirstName[i] =  draftables[[i]]$firstName
-  LastName[i] =  draftables[[i]]$lastName
-  Position[i] =  draftables[[i]]$position
-  Salary[i] =  draftables[[i]]$salary
-  Team[i] =  tolower(draftables[[i]]$teamAbbreviation)
-  if (draftables[[i]]$draftStatAttributes[[1]]$id >= 0){
-  Proj_Points[i] =  draftables[[i]]$draftStatAttributes[[1]]$value}
-  else {Proj_Points[i] = NA}
+  
+  player = draftables[[i]]
+  
+  FirstName[i] =  player$firstName
+  LastName[i] =  player$lastName
+  Position[i] =  player$position
+  Salary[i] =  player$salary
+  Team[i] =  tolower(player$teamAbbreviation)
+  Proj_Points[i] =  ifelse(player$draftStatAttributes[[1]]$id >= 0, 
+                           player$draftStatAttributes[[1]]$value, -9999)
 }
 
 DK_DF = data.frame(
@@ -84,6 +86,8 @@ def_dk_filtered = DK_DF %>%  filter(Position == 'DST')
 # merge on Team into DK_DF
 #
 merged = left_join(dk_filtered, player_filtered, on=Team)
+
+
 
 
 write.table(DK_DF, "DK_test.csv", sep=",")

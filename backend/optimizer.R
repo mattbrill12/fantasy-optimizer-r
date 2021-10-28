@@ -12,6 +12,7 @@ library(lpSolve)
 #Read in dataset
 dataset<-read.csv("DK_test.csv", stringsAsFactors = FALSE)
 
+
 #Change variables to appropriate types
 dataset$Position <- as.factor(dataset$Position)
 #dataset$Salary <-as.numeric(dataset$Salary)
@@ -60,9 +61,11 @@ for (i in 1:nrow(dataset)){
 j<-5
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="RB" || (dataset$Position[i]=="WR" || dataset$Position[i]== "TE")
+  if (dataset$Position[i]=="RB" || 
+      dataset$Position[i]=="WR" || 
+      dataset$Position[i]== "TE")
     A[j,i]<-1
-    }
+}
 #DST
 j<-6
 i<-1
@@ -74,6 +77,8 @@ for (i in 1:nrow(dataset)){
 
 
 A[7, ] <- dataset$Salary                # salary <= 50000
+
+
 
 
 # Prepare input for LP solver
@@ -92,12 +97,13 @@ sol <- lp(direction = "max", objective.in, # maximize objective function
 inds <- which(sol$solution == 1)
 sum(dataset$salary[inds])
 
-
 solution<-dataset[inds, ]
 
 #Print players in optimal lineup
 solution
 
+browser()
+
 #Write csv file of the optimal lineup
-#write.table(solution, "mydata.txt", sep="\t")
+write.table(solution, "mydata.txt", sep="\t")
 
