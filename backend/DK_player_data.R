@@ -58,7 +58,7 @@ for(i in 1:length(draftables)){
   Salary[i] =  player$salary
   Team[i] =  tolower(player$teamAbbreviation)
   Proj_Points[i] =  ifelse(player$draftStatAttributes[[1]]$id >= 0, 
-                           player$draftStatAttributes[[1]]$value, -9999)
+                           player$draftStatAttributes[[1]]$value, 0)
 }
 
 DK_DF = data.frame(
