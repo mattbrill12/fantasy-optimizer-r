@@ -4,7 +4,7 @@ const cors = require('cors');
 const port = 3001;
 const axios = require('axios');
 
-const apiPort = '5591'
+const apiPort = '7980'
 const baseUrl = `http://localhost:${apiPort}`;
 
 app.use(function (req, res, next) {
