@@ -10,13 +10,14 @@
 library(lpSolve)
 
 #Read in dataset
-dataset<-read.csv("INSERT CSV", stringsAsFactors = FALSE)
+dataset<-read.csv("DK_test.csv", stringsAsFactors = FALSE)
 
 #Change variables to appropriate types
 dataset$Position <- as.factor(dataset$Position)
-dataset$Salary <-as.numeric(dataset$Salary)
-dataset$Proj_Points <-as.numeric(dataset$Proj_Points)
-dataset$Avg.DK.Points <-as.numeric(dataset$Avg.DK.Points)
+#dataset$Salary <-as.numeric(dataset$Salary)
+#dataset$Proj_Points <-as.numeric(dataset$Proj_Points)
+#dataset$Avg.DK.Points <-as.numeric(dataset$Avg.DK.Points)
+
 
 #### Prepare constraint matrix of zeros #####
 A <- matrix(0, nrow = 7, ncol = nrow(dataset))
@@ -59,11 +60,9 @@ for (i in 1:nrow(dataset)){
 j<-5
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="RB"    || 
-      dataset$position[i]=="WR" || 
-      dataset$position[i]== "TE")
+  if (dataset$Position[i]=="RB" || (dataset$Position[i]=="WR" || dataset$Position[i]== "TE")
     A[j,i]<-1
-}
+    }
 #DST
 j<-6
 i<-1
@@ -73,14 +72,14 @@ for (i in 1:nrow(dataset)){
 }
 
 
-i<-1
 
 A[7, ] <- dataset$Salary                # salary <= 50000
+
 
 # Prepare input for LP solver
 objective.in <- dataset$Proj_Points
 const.mat <- A
-const.dir <- c("==", "==", "==", "==","==","==", "<=")
+const.dir <- c('==', '==','==', '==','==','==', '<=')
 const.rhs <- c(1, 2, 3, 1, 1, 1, 50000)
 
 # Generate optimal lineup with lp solve
@@ -100,4 +99,5 @@ solution<-dataset[inds, ]
 solution
 
 #Write csv file of the optimal lineup
-write.table(solution1, "mydata.txt", sep="\t")
+#write.table(solution, "mydata.txt", sep="\t")
+

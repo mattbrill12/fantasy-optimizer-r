@@ -86,8 +86,6 @@ def_dk_filtered = DK_DF %>%  filter(Position == 'DST')
 merged = left_join(dk_filtered, player_filtered, on=Team)
 
 
-
-
-
+write.table(DK_DF, "DK_test.csv", sep=",")
 
 
