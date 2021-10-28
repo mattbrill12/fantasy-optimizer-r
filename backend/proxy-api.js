@@ -16,14 +16,19 @@ app.use(function (req, res, next) {
 app.get('/season', async (req, res) => {
     const resp = await axios.get(`${baseUrl}/season`);
     res.send(JSON.parse(resp.data)); // convert stringified object to JSON 
-})
+});
 
 app.get('/team/:id', async (req, res) => {
     const resp = await axios.get(`${baseUrl}/team/${req.params.id}`);
     console.log(resp)
     res.send(resp.data[0])
-})
+});
+
+app.get('/optimized-lineup', async (req, res) => {
+    const resp = await axios.get(`${baseUrl}/optimized-lineup`);
+    res.send(JSON.parse(resp.data))
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});

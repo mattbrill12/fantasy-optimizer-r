@@ -104,8 +104,6 @@ solution<-dataset[inds, ]
 #Print players in optimal lineup
 solution
 
-browser()
-
 #Write csv file of the optimal lineup
 write.table(solution, "mydata.csv", sep=",")
 
