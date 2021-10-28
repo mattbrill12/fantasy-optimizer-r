@@ -3,7 +3,7 @@ const _ = require('lodash');
 const csv = require('csvtojson');
 
 const csvFilePath = 'DK_test.csv'
-const SALARY_CAP = 50000;
+const SALARY_CAP = 40000;
 const EQUAL_PLAYER_COUNT = 8;
 const POSITION = {
     QB: 'QB',

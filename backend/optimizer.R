@@ -84,8 +84,10 @@ A[7, ] <- dataset$Salary                # salary <= 50000
 # Prepare input for LP solver
 objective.in <- dataset$Proj_Points
 const.mat <- A
-const.dir <- c('==', '==','==', '==','==','==', '<=')
-const.rhs <- c(1, 2, 3, 1, 1, 1, 50000)
+const.dir <- c('==', '>=','>=', '>=','==','==', '<=')
+const.rhs <- c(1, 2, 3, 1, 7, 1, 50000)
+
+
 
 # Generate optimal lineup with lp solve
 require(lpSolve)
@@ -105,5 +107,8 @@ solution
 browser()
 
 #Write csv file of the optimal lineup
-write.table(solution, "mydata.txt", sep="\t")
+write.table(solution, "mydata.csv", sep=",")
+
+
+
 
