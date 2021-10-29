@@ -20,8 +20,8 @@ random_walk <- function(x, trials) {
   
       team = rbind(qb, rb, wr, te, dst, flex)
   
-      team_total = sum(team$Proj_Points)
-      max_total = sum(max_val_team$Proj_Points)
+      team_total = sum(team$roll_average_points)
+      max_total = sum(max_val_team$roll_avg_points)
   
       if (team_total > max_total) {
         max_val_team = team
