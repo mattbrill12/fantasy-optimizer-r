@@ -113,5 +113,3 @@ colnames(merged_def)[colnames(merged_def) == 'Pos.x'] = 'Pos'
 df_full = rbind(merged, merged_def)
 
 write.table(df_full, "df_full.csv", sep=",")
-
-

@@ -9,6 +9,7 @@
 
 library(lpSolve)
 
+
 #Read in dataset
 dataset<-read.csv("df_full.csv", stringsAsFactors = FALSE)
 
@@ -102,11 +103,10 @@ sum(dataset$Salary[inds])
 solution<-dataset[inds, ]
 
 #Print players in optimal lineup
-solution
+#solution
 
 #Write csv file of the optimal lineup
 write.table(solution, "mydata.csv", sep=",")
-
 
 
 

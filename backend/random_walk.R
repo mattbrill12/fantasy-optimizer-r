@@ -32,6 +32,3 @@ random_walk <- function(x, trials) {
 
 random_walk(data, 10)
 
-library(rjson)
-
-toJSON(test)
