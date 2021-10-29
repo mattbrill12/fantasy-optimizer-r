@@ -5,13 +5,9 @@ function Player({ name, salary, value, position, team }) {
     return (
         <Card border="dark">
             <Card.Body>
-                <Card.Title>{name} {position} {team}</Card.Title>
-                <Card.Text>
-                    <ul>
-                        <li>{salary}</li>
-                        <li>{value}</li>
-                    </ul>
-                </Card.Text>
+                <Card.Title>{name} | {position} | {team}</Card.Title>
+                <Card.Text>{salary}</Card.Text>
+                <Card.Text>{value}</Card.Text>
             </Card.Body>
         </Card>
     )

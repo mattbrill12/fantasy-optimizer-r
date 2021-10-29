@@ -15,43 +15,33 @@ cors <- function(res) {
 
 #* @preempt cors
 #* @param The text to be echoed in the response
-#* @get /season
+#* @get /draftables
 function() {
-  load(url('https://s3.amazonaws.com/graderdata/Knicks.rda'))
-  
-  dataSummary <- data %>%
-    group_by(visiting, season) %>%
-    summarise(ratio = sum(win == 'W')/n())
-
-  x <- toJSON(dataSummary)
-  return(x)
-}
-
-#* @preempt cors
-#* @param The text to be echoed in the response
-#* @get /team/<id>
-function(id) {
-  return(tolower(as.character(id)))
-}
-
-#* @preempt cors
-#* @param The text to be echoed in the response
-#* @get /lineup
-function() {
-  json_file <- "https://api.draftkings.com/draftgroups/v1/draftgroups/58257/draftables?format=json"
+  json_file <- "https://api.draftkings.com/draftgroups/v1/draftgroups/58073/draftables?format=json"
   json_data <- fromJSON(paste(readLines(json_file), collapse=""))
-  return(json_data)
+  return(toJSON(json_data$draftables))
 }
 
 #* @preempt cors
 #* @param The text to be echoed in the response
 #* @get /optimized-lineup
-function() {
+function(req) {
   dataset <- read.csv("mydata.csv", stringsAsFactors = FALSE)
   df = data.frame(dataset)
   return(toJSON(df))
 }
 
+#* @preempt cors
+#* @param The text to be echoed in the response
+#* @get /generated-lineup/<numTrials>
+function(req) {
+  dataset <- read.csv("randomwalk", stringsAsFactors = FALSE)
+  df = data.frame(dataset)
+  return(toJSON(df))
+}
+
 print(c('.......api started..........'))
+
+
 
 
