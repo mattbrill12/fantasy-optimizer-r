@@ -83,7 +83,7 @@ A[7, ] <- dataset$Salary                # salary <= 50000
 
 
 # Prepare input for LP solver
-objective.in <- dataset$Proj_Points
+objective.in <- dataset$roll_average_points
 const.mat <- A
 const.dir <- c('==', '>=','>=', '>=','==','==', '<=')
 const.rhs <- c(1, 2, 3, 1, 7, 1, 50000)

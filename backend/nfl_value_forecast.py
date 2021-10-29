@@ -14,6 +14,6 @@ DK_cumulative['Bool'] = [1 if x > 0 else 0 for x in DK_cumulative['DK points']]
 
 DK_cumulative['Games Played'] = DK_cumulative.groupby('Name')['Bool'].cumsum()
 
-DK_cumulative['Average DK Points'] = DK_cumulative['DK_cum_points'] / DK_cumulative['Games Played']
+DK_cumulative['roll_average_points'] = DK_cumulative['DK_cum_points'] / DK_cumulative['Games Played']
 
 DK_cumulative.to_csv('DK_avg_points.csv', sep=';', encoding='utf-8')
