@@ -2,6 +2,10 @@ library(plumber)
 library(tidyverse)
 library(jsonlite)
 library(rjson)
+# source('optimizer_alt.R')
+# source('optimizer.R')
+source('random_walk.R')
+# source('random_walk_alt.R')
 
 
 #* @apiTitle Plumber Example API
@@ -24,19 +28,32 @@ function() {
 
 #* @preempt cors
 #* @param The text to be echoed in the response
-#* @get /optimized-lineup
+#* @get /optimized-lineup/dk
 function(req) {
-  dataset <- read.csv("mydata.csv", stringsAsFactors = FALSE)
+  dataset <- read.csv("dk.csv", stringsAsFactors = FALSE)
   df = data.frame(dataset)
   return(toJSON(df))
 }
 
 #* @preempt cors
 #* @param The text to be echoed in the response
-#* @get /generated-lineup/<numTrials>
+#* @get /optimized-lineup/runAvg
 function(req) {
-  dataset <- read.csv("randomwalk", stringsAsFactors = FALSE)
+  dataset <- read.csv("runAvg.csv", stringsAsFactors = FALSE)
   df = data.frame(dataset)
+  return(toJSON(df))
+}
+
+#* @preempt cors
+#* @param The text to be echoed in the response
+#* @get /generated-lineup
+function(req) {
+  
+  
+  print(c('.......generated-lineup started..........'))
+  dataset <- read.csv("df_full.csv", stringsAsFactors = FALSE)
+  lineup <- random_walk(dataset, 100)
+  df = data.frame(lineup)
   return(toJSON(df))
 }
 

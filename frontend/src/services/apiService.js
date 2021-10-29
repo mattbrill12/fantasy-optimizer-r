@@ -12,7 +12,7 @@ export function getOptimizedLineup(type) {
 }
 
 export function getGeneratedLineup(type) {
-    let url = `${baseUrl}/generated-lineup`;
+    let url = `${baseUrl}/generated-lineup/1`;
     return axios.get(url).then(({ data }) => formatData(data))
 }
 
