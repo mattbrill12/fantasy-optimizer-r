@@ -10,11 +10,11 @@
 library(lpSolve)
 
 #Read in dataset
-dataset<-read.csv("DK_test.csv", stringsAsFactors = FALSE)
+dataset<-read.csv("df_full.csv", stringsAsFactors = FALSE)
 
 
 #Change variables to appropriate types
-dataset$Position <- as.factor(dataset$Position)
+dataset$Pos <- as.factor(dataset$Pos)
 #dataset$Salary <-as.numeric(dataset$Salary)
 #dataset$Proj_Points <-as.numeric(dataset$Proj_Points)
 #dataset$Avg.DK.Points <-as.numeric(dataset$Avg.DK.Points)
@@ -33,44 +33,44 @@ A <- matrix(0, nrow = 7, ncol = nrow(dataset))
 j<-1
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="QB")
+  if (dataset$Pos[i]=="QB")
     A[j,i]<-1
 }
 #RB
 j<-2
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="RB")
+  if (dataset$Pos[i]=="RB")
     A[j,i]<-1
 }
 #WR
 j<-3
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="WR")
+  if (dataset$Pos[i]=="WR")
     A[j,i]<-1
 }
 #TE
 j<-4
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="TE")
+  if (dataset$Pos[i]=="TE")
     A[j,i]<-1
 }
 #FLEX
 j<-5
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="RB" || 
-      dataset$Position[i]=="WR" || 
-      dataset$Position[i]== "TE")
+  if (dataset$Pos[i]=="RB" || 
+      dataset$Pos[i]=="WR" || 
+      dataset$Pos[i]== "TE")
     A[j,i]<-1
 }
 #DST
 j<-6
 i<-1
 for (i in 1:nrow(dataset)){
-  if (dataset$Position[i]=="DST") 
+  if (dataset$Pos[i]=="DST") 
     A[j,i]<-1
 }
 
@@ -97,7 +97,7 @@ sol <- lp(direction = "max", objective.in, # maximize objective function
 
 ### View the solution
 inds <- which(sol$solution == 1)
-sum(dataset$salary[inds])
+sum(dataset$Salary[inds])
 
 solution<-dataset[inds, ]
 

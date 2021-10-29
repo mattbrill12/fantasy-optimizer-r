@@ -50,7 +50,7 @@ Pos: Position of the NFL player recording points in the contest
 
 Team: NFL team the player recording points belongs to
 
-salary: Virtual dollars required to draft a player for a contest
+salary: Virtual dollars required to draft a player for a contest, salaries set by DraftKings
 
 Proj_Points: Points projections for each player provided by DraftKings for each contest
 

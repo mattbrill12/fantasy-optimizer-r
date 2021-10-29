@@ -1,7 +1,7 @@
 ## Create a script to randomly generate lineups given the team and salary constraints
 
 library(dplyr)
-data<-read.csv("DK_test.csv", stringsAsFactors = FALSE)
+data<-read.csv("df_full.csv", stringsAsFactors = FALSE)
 
 max_val_team = data.frame(matrix(rep(0, 45),nrow = 9, ncol = 5)) ## initiate date frame of empty lineup
 colnames(max_val_team) <- c('LastName', 'FirstName', 'Position', 
@@ -11,12 +11,12 @@ colnames(max_val_team) <- c('LastName', 'FirstName', 'Position',
 random_walk <- function(x, trials) {
   
   for (i in 1:trials){
-      qb <- x %>% filter(Position == "QB") %>% sample_n(1)
-      rb <- x %>% filter(Position == "RB") %>% sample_n(2)
-      wr <- x %>% filter(Position == "WR") %>% sample_n(3)
-      te <- x %>% filter(Position == "TE") %>% sample_n(1)
-      dst <- x%>% filter(Position == "DST") %>% sample_n(1)
-      flex <- x %>% filter(Position %in% c("RB", "WR", "TE")) %>% sample_n(1)
+      qb <- x %>% filter(Pos == "QB") %>% sample_n(1)
+      rb <- x %>% filter(Pos == "RB") %>% sample_n(2)
+      wr <- x %>% filter(Pos == "WR") %>% sample_n(3)
+      te <- x %>% filter(Pos == "TE") %>% sample_n(1)
+      dst <- x%>% filter(Pos == "DST") %>% sample_n(1)
+      flex <- x %>% filter(Pos %in% c("RB", "WR", "TE")) %>% sample_n(1)
   
       team = rbind(qb, rb, wr, te, dst, flex)
   
