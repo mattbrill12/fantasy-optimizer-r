@@ -8,7 +8,7 @@ colnames(max_val_team) <- c('LastName', 'FirstName', 'Position',
                                  'Salary', 'Proj_Points')
 
 
-random_walk <- function(x, trials) {
+random_walk_alt <- function(x, trials) {
   
   for (i in 1:trials){
       qb <- x %>% filter(Pos == "QB") %>% sample_n(1)
@@ -22,7 +22,7 @@ random_walk <- function(x, trials) {
   
       team_total = sum(team$roll_average_points)
       max_total = sum(max_val_team$roll_avg_points)
-  
+      
       if (team_total > max_total) {
         max_val_team = team
       }
