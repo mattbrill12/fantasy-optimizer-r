@@ -3,7 +3,7 @@
 library(dplyr)
 data<-read.csv("DK_test.csv", stringsAsFactors = FALSE)
 
-max_val_team = data.frame(matrix(rep(0, 45),nrow = 9, ncol = 5))
+max_val_team = data.frame(matrix(rep(0, 45),nrow = 9, ncol = 5)) ## initiate date frame of empty lineup
 colnames(max_val_team) <- c('LastName', 'FirstName', 'Position', 
                                  'Salary', 'Proj_Points')
 
@@ -31,3 +31,7 @@ random_walk <- function(x, trials) {
 }
 
 random_walk(data, 10)
+
+library(rjson)
+
+toJSON(test)
