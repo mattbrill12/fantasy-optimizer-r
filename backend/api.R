@@ -43,7 +43,15 @@ function() {
   return(json_data)
 }
 
+#* @preempt cors
+#* @param The text to be echoed in the response
+#* @get /optimized-lineup
+function() {
+  dataset <- read.csv("mydata.csv", stringsAsFactors = FALSE)
+  df = data.frame(dataset)
+  return(toJSON(df))
+}
 
-print(c('api started'))
+print(c('.......api started..........'))
 
 

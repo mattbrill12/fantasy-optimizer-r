@@ -1,27 +1,11 @@
 import Player from '../player/Player';
 
-function Lineup() {
-
-    let players = [{
-        id: 1,
-        name: 'Joe Smith',
-        salary: 10000,
-        value: 30,
-        position: 'Q'
-    }, {
-        id: 2,
-        name: 'John Smith',
-        salary: 10000,
-        value: 30,
-        position: 'Q'
-    }]
-
+function Lineup({ players, horizontal = false }) {
     return (
-        <>
-            <h1>Lineup</h1>
+        <div>
             {players && players.map(p => <Player key={p.id} {...p} />)}
-
-        </>)
+        </div>
+    )
 }
 
 export default Lineup;

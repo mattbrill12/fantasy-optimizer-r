@@ -29,6 +29,14 @@ function App() {
           <Tab eventKey="runAvg" title="Running Avg">
             <Optimizer type={'runAvg'} />
           </Tab>
+
+          {/*  */}
+          <Tab eventKey="randomWalk" title="Random Walk">
+            <Optimizer type={'randomWalk'} />
+          </Tab>
+          <Tab eventKey="runAvg" title="Random Walk">
+            <Optimizer type={'randomWalk'} />
+          </Tab>
         </Tabs>
 
       </div>

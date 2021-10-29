@@ -1,15 +1,19 @@
-function Player({ name, salary, value, position }) {
+import Card from 'react-bootstrap/Card'
+
+
+function Player({ name, salary, value, position, team }) {
     return (
-        <div className="border">
-            <div className="d-flex">{name}</div>
-            <div className="d-flex p-2">
-                <ul>
-                    <li>{salary}</li>
-                    <li>{value}</li>
-                    <li>{position}</li>
-                </ul>
-            </div>
-        </div>
+        <Card border="dark">
+            <Card.Body>
+                <Card.Title>{name} {position} {team}</Card.Title>
+                <Card.Text>
+                    <ul>
+                        <li>{salary}</li>
+                        <li>{value}</li>
+                    </ul>
+                </Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
 
