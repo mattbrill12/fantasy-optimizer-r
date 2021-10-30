@@ -18,13 +18,17 @@ app.get('/draftables', async (req, res) => {
     res.send(JSON.parse(resp.data)); // convert stringified object to JSON 
 });
 
-app.get('/optimized-lineup', async (req, res) => {
-    const resp = await axios.get(`${baseUrl}/optimized-lineup`);
+app.get('/optimized-lineup/:type', async (req, res) => {
+    const resp = await axios.get(`${baseUrl}/optimized-lineup/${req.params.type}`);
     res.send(JSON.parse(resp.data))
 });
 
-app.get('/generated-lineup', async (req, res) => {
-    const resp = await axios.get(`${baseUrl}/generated-lineup`);
+app.get('/generated-lineup/:type', async (req, res) => {
+    let url = `${baseUrl}/generated-lineup/${req.params.type}`;
+    if (req.query.numTrials) url = `${url}?numTrials=${req.query.numTrials}`
+
+    console.log(url)
+    const resp = await axios.get(url);
     res.send(JSON.parse(resp.data))
 });
 

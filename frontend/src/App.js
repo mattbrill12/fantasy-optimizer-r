@@ -25,7 +25,6 @@ function App() {
 
     async function loadData() {
         const players = await getDraftables();
-        console.log(players)
         setPlayers(players)
     }
 
@@ -43,30 +42,32 @@ function App() {
                     </Col>
                     <Col md={9}>
                         <div className="main">
+                            <h1>Linear Programming Solver</h1>
                             <Tabs
                                 id="controlled-tab-example"
                                 activeKey={optimizerKey}
                                 onSelect={(k) => setOptimizerKey(k)}
                                 className="mb-3"
                             >
-                                <Tab eventKey={lineupTypes.optimizers.dk} title="Draft Kings">
+                                <Tab eventKey={lineupTypes.optimizers.dk} title="Draft Kings Projections">
                                     <Optimizer type={lineupTypes.optimizers.dk} />
                                 </Tab>
-                                <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Avg">
-                                    <Optimizer type={lineupTypes.optimizers.runAvg} />
+                                <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Average Projections">
+                                    {/* <Optimizer type={lineupTypes.optimizers.runAvg} /> */}
+                                    <p className="invalid">Error loading running average projections</p>
                                 </Tab>
                             </Tabs>
-
+                            <h1>Random Walk Generator</h1>
                             <Tabs
                                 id="controlled-tab-example"
                                 activeKey={generatorKey}
                                 onSelect={(k) => setGeneratorKey(k)}
                                 className="mb-3"
                             >
-                                <Tab eventKey={lineupTypes.generators.dk} title="Random Walk">
+                                <Tab eventKey={lineupTypes.generators.dk} title="Draft Kings Projections">
                                     <Optimizer type={lineupTypes.generators.dk} optimizer={false} />
                                 </Tab>
-                                <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average">
+                                <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average Projections">
                                     <Optimizer type={lineupTypes.generators.runAvg} optimizer={false} />
                                 </Tab>
                             </Tabs>

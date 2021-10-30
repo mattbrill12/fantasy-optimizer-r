@@ -30,9 +30,7 @@ function() {
 #* @param The text to be echoed in the response
 #* @get /optimized-lineup/dk
 function(req) {
-  print(c('.......optimized-lineup/dk started..........'))
   df <- runOptimizer()
-  print(c('.......optimized-lineup/dk finished..........'))
   return(toJSON(df))
 }
 
@@ -40,33 +38,29 @@ function(req) {
 #* @param The text to be echoed in the response
 #* @get /optimized-lineup/runAvg
 function(req) {
-  print(c('.......optimized-lineup/runAvg started..........'))
   df <- runOptimizerRunAvg()
-  print(c('.......optimized-lineup/runAvg finished..........'))
   return(toJSON(df))
 }
 
 #* @preempt cors
 #* @param The text to be echoed in the response
 #* @get /generated-lineup/dk
-function(req) {
-  print(c('.......generated-lineup started..........'))
+function(numTrials=10) {
+  print(numTrials)
   dataset <- read.csv("df_full.csv", stringsAsFactors = FALSE)
-  lineup <- random_walk(dataset, 100)
+  lineup <- random_walk(dataset, numTrials)
   df = data.frame(lineup)
-  print(c('.......generated-lineup finished..........'))
   return(toJSON(df))
 }
 
 #* @preempt cors
 #* @param The text to be echoed in the response
 #* @get /generated-lineup/runAvg
-function(req) {
-  print(c('.......generated-lineup random walk alt started..........'))
+function(numTrials=10) {
+  print(numTrials)
   dataset <- read.csv("df_full.csv", stringsAsFactors = FALSE)
-  lineup <- random_walk_alt(dataset, 100)
+  lineup <- random_walk_alt(dataset, numTrials)
   df = data.frame(lineup)
-  print(c('.......generated-lineup random walk alt finished.........'))
   return(toJSON(df))
 }
 print(c('.......api started..........'))
