@@ -102,7 +102,6 @@ dk_filtered = DK_DF %>%  filter(Pos != 'DST')
 
 # Merge tables on Name and Position
 merged = left_join(dk_filtered, player_filtered, by= c("lastname", "firstname", "Pos"))
-
 merged = merged %>% select(lastname, firstname, Team.x, Pos, Salary, Proj_Points, roll_average_points)
 
 colnames(merged)[colnames(merged) == 'Team.x'] = 'Team'
@@ -113,5 +112,10 @@ colnames(merged_def)[colnames(merged_def) == 'Pos.x'] = 'Pos'
 df_full = rbind(merged, merged_def)
 
 df_full[is.na(df_full)] = 0
+<<<<<<< HEAD
+=======
+df_full[df_full == -Inf] <- 0
+>>>>>>> 2236765c964a17e1955a111fb3164a24bc9aa194
 
 write.table(df_full, "df_full.csv", sep=",")
+

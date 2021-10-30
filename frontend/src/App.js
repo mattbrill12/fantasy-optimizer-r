@@ -1,48 +1,83 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 import './App.css';
 import Optimizer from './components/optimizer/Optimizer';
 import Header from './components/header/Header';
-
+import Lineup from './components/lineup/Lineup';
+import lineupTypes from './shared/constants/lineup-types';
+import { getDraftables } from './services/apiService';
 
 function App() {
 
-  const [key, setKey] = useState('dk');
+    const [optimizerKey, setOptimizerKey] = useState(lineupTypes.optimizers.dk);
+    const [generatorKey, setGeneratorKey] = useState(lineupTypes.generators.dk);
+    const [players, setPlayers] = useState([]);
 
-  return (
-    <div className="App">
+    useEffect(() => {
+        loadData()
+    }, [])
 
-      <Header />
+    async function loadData() {
+        const players = await getDraftables();
+        console.log(players)
+        setPlayers(players)
+    }
 
-      <div className="container">
-        <Tabs
-          id="controlled-tab-example"
-          activeKey={key}
-          onSelect={(k) => setKey(k)}
-          className="mb-3"
-        >
-          <Tab eventKey="dk" title="Draft Kings">
-            <Optimizer type={'dk'} />
-          </Tab>
-          <Tab eventKey="runAvg" title="Running Avg">
-            <Optimizer type={'runAvg'} />
-          </Tab>
+    return (
+        <div className="App">
 
-          {/*  */}
-          <Tab eventKey="randomWalk" title="Random Walk">
-            <Optimizer type={'randomWalk'} />
-          </Tab>
-          <Tab eventKey="runAvg" title="Random Walk">
-            <Optimizer type={'randomWalk'} />
-          </Tab>
-        </Tabs>
+            <Header />
 
-      </div>
+            <Container>
+                <Row>
+                    <Col md={3}>
+                        <div className="side" style={{ height: '100vh', overflow: 'scroll' }}>
+                            <Lineup players={players} />
+                        </div>
+                    </Col>
+                    <Col md={9}>
+                        <div className="main">
+                            <Tabs
+                                id="controlled-tab-example"
+                                activeKey={optimizerKey}
+                                onSelect={(k) => setOptimizerKey(k)}
+                                className="mb-3"
+                            >
+                                <Tab eventKey={lineupTypes.optimizers.dk} title="Draft Kings">
+                                    <Optimizer type={lineupTypes.optimizers.dk} />
+                                </Tab>
+                                <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Avg">
+                                    <Optimizer type={lineupTypes.optimizers.runAvg} />
+                                </Tab>
+                            </Tabs>
 
-    </div>
-  );
+                            <Tabs
+                                id="controlled-tab-example"
+                                activeKey={generatorKey}
+                                onSelect={(k) => setGeneratorKey(k)}
+                                className="mb-3"
+                            >
+                                <Tab eventKey={lineupTypes.generators.dk} title="Random Walk">
+                                    <Optimizer type={lineupTypes.generators.dk} optimizer={false} />
+                                </Tab>
+                                <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average">
+                                    <Optimizer type={lineupTypes.generators.runAvg} optimizer={false} />
+                                </Tab>
+                            </Tabs>
+                        </div>
+                    </Col>
+                </Row>
+
+            </Container>
+
+        </div >
+    );
 }
 
 export default App;
