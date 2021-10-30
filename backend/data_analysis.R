@@ -41,3 +41,17 @@ trial_test %>% ggplot(aes(x = trials, y = team_points)) + geom_line() + scale_x_
 library(ggcorrplot)
 
 df %>% select(Salary, Proj_Points) %>% cor() %>% ggcorrplot(lab = TRUE)
+
+df_check = read.csv("DK_avg_points.csv", sep = ';')
+
+df_check = df_check %>% filter(Week > 1) %>% filter(Games.Played >= 2)
+
+df_check = df_check %>% select(Week, Name, Pos, Team, DK.points, DK.salary, DK_cum_points, Games.Played, roll_average_points)
+
+df_check['prev_avg'] = (df_check$DK_cum_points - df_check$DK.points) /(df_check$Games.Played - 1)
+
+df_check %>% select(Week, DK.points, prev_avg) %>% filter(prev_avg > 10) %>% ggplot(aes(x = prev_avg, y = DK.points)) + geom_point()
+
+#df_check %>% group_by(Name, Pos) %>% filter(Name %in% c('Kupp, Cooper', 'Samuel, Deeb', 'Brown, Antonio')) %>% summarise(std = sd(DK.points)) %>% arrange((std))
+
+df_check %>% group_by(Name, Pos) %>% summarise(std = sd(DK.points), mean = mean(DK.points)) %>% ggplot(aes(x = mean, y = std, color = Pos)) + geom_point()
