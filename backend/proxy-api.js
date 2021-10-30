@@ -18,6 +18,11 @@ app.get('/draftables', async (req, res) => {
     res.send(JSON.parse(resp.data)); // convert stringified object to JSON 
 });
 
+app.get('/positions', async (req, res) => {
+    const resp = await axios.get(`${baseUrl}/positions`);
+    res.send(resp.data);
+});
+
 app.get('/optimized-lineup/:type', async (req, res) => {
     const resp = await axios.get(`${baseUrl}/optimized-lineup/${req.params.type}`);
     res.send(JSON.parse(resp.data))

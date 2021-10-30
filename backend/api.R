@@ -28,6 +28,13 @@ function() {
 
 #* @preempt cors
 #* @param The text to be echoed in the response
+#* @get /positions
+function(req) {
+  return(c('QB', 'RB', 'WR', 'TE', 'DST'))
+}
+
+#* @preempt cors
+#* @param The text to be echoed in the response
 #* @get /optimized-lineup/dk
 function(req) {
   df <- runOptimizer()

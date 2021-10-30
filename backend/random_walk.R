@@ -30,6 +30,4 @@ random_walk <- function(x, trials) {
   return(max_val_team)
 }
 
-# r_walk = random_walk(data, 10)
-# r_walk
-#write.table(r_walk, "r_walk_data.csv", sep=",")
+

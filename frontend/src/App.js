@@ -11,21 +11,22 @@ import Optimizer from './components/optimizer/Optimizer';
 import Header from './components/header/Header';
 import Lineup from './components/lineup/Lineup';
 import lineupTypes from './shared/constants/lineup-types';
-import { getDraftables } from './services/apiService';
+import { getDraftables, getPositions } from './services/apiService';
 
 function App() {
 
     const [optimizerKey, setOptimizerKey] = useState(lineupTypes.optimizers.dk);
     const [generatorKey, setGeneratorKey] = useState(lineupTypes.generators.dk);
     const [players, setPlayers] = useState([]);
+    const [positions, setPositions] = useState([]);
 
     useEffect(() => {
         loadData()
     }, [])
 
-    async function loadData() {
-        const players = await getDraftables();
-        setPlayers(players)
+    function loadData() {
+        getPositions().then(p => setPositions(p));
+        getDraftables().then(p => setPlayers(p));
     }
 
     return (
@@ -37,6 +38,7 @@ function App() {
                 <Row>
                     <Col md={3}>
                         <div className="side" style={{ height: '100vh', overflow: 'scroll' }}>
+                            {positions && positions.map(p => <span className="p-2">{p}</span>)}
                             <Lineup players={players} />
                         </div>
                     </Col>

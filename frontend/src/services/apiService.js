@@ -3,7 +3,11 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:3001';
 
 export function getDraftables() {
-    return axios.get(`${baseUrl}/draftables`).then(resp => formatDraftables(resp.data))
+    return axios.get(`${baseUrl}/draftables`).then(resp => formatDraftables(resp.data));
+}
+
+export function getPositions() {
+    return axios.get(`${baseUrl}/positions`).then(resp => resp.data);
 }
 
 export function getOptimizedLineup(type) {
