@@ -10,10 +10,11 @@ export function getPositions() {
     return axios.get(`${baseUrl}/positions`).then(resp => resp.data);
 }
 
-export function getOptimizedLineup(type) {
+export function getOptimizedLineup(type, excludes = []) {
     let url = `${baseUrl}/optimized-lineup/${type}`;
-    return axios.get(url).then(({ data }) => {
+    return axios.post(url, excludes).then(({ data }) => {
         let result = {}
+        console.log(data)
         result.draftables = formatData(data)
         result.totalValue = data.Proj_Points.reduce((a, b) => a + b)
         result.totalSalary = data.Salary.reduce((a, b) => a + b)
@@ -42,7 +43,7 @@ const formatData = data => {
     // TODO refactor in BE
     for (let i = 0; i < data.firstname.length; i++) {
         players.push({
-            id: i,
+            id: data.id[i],
             name: `${data.firstname[i]} ${data.lastname[i]}`,
             value: data.Proj_Points[i],
             salary: data.Salary[i],

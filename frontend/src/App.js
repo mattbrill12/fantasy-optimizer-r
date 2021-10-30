@@ -8,10 +8,12 @@ import Col from 'react-bootstrap/Col';
 
 import './App.css';
 import Optimizer from './components/optimizer/Optimizer';
+import Generator from './components/generator/Generator';
 import Header from './components/header/Header';
 import Lineup from './components/lineup/Lineup';
 import lineupTypes from './shared/constants/lineup-types';
 import { getDraftables, getPositions } from './services/apiService';
+
 
 function App() {
 
@@ -38,7 +40,12 @@ function App() {
                 <Row>
                     <Col md={3}>
                         <div className="side" style={{ height: '100vh', overflow: 'scroll' }}>
-                            {positions && positions.map(p => <span className="p-2">{p}</span>)}
+                            <h4>Week 7</h4>
+
+                            <div>
+                                {positions && positions.map((p, i) => <a key={i} className="p-2" > {p}</a>)}
+                            </div>
+
                             <Lineup players={players} />
                         </div>
                     </Col>
@@ -67,10 +74,10 @@ function App() {
                                 className="mb-3"
                             >
                                 <Tab eventKey={lineupTypes.generators.dk} title="Draft Kings Projections">
-                                    <Optimizer type={lineupTypes.generators.dk} optimizer={false} />
+                                    <Generator type={lineupTypes.generators.dk} optimizer={false} />
                                 </Tab>
                                 <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average Projections">
-                                    <Optimizer type={lineupTypes.generators.runAvg} optimizer={false} />
+                                    <Generator type={lineupTypes.generators.runAvg} optimizer={false} />
                                 </Tab>
                             </Tabs>
                         </div>

@@ -35,9 +35,10 @@ function(req) {
 
 #* @preempt cors
 #* @param The text to be echoed in the response
-#* @get /optimized-lineup/dk
+#* @post /optimized-lineup/dk
 function(req) {
-  df <- runOptimizer()
+  excludes = req$body
+  df <- runOptimizer(excludes)
   return(toJSON(df))
 }
 

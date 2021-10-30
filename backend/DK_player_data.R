@@ -50,10 +50,12 @@ Position = c()
 Salary = c()
 Proj_Points = c()
 Team = c()
+Id = c()
 
 ## Loop through Json file to fill vector fields
 for(i in 1:length(json_data$draftables)){
   
+  Id[i] = json_data$draftables[[i]]$playerId
   FirstName[i] =  json_data$draftables[[i]]$firstName
   LastName[i] =  json_data$draftables[[i]]$lastName
   Position[i] =  json_data$draftables[[i]]$position
@@ -61,10 +63,12 @@ for(i in 1:length(json_data$draftables)){
   Team[i] =  tolower(json_data$draftables[[i]]$teamAbbreviation)
   Proj_Points[i] =  ifelse(json_data$draftables[[i]]$draftStatAttributes[[1]]$id >= 0, 
                            json_data$draftables[[i]]$draftStatAttributes[[1]]$value, 0)
+  
 }
 
 ## Create data frame from vector fields
 DK_DF = data.frame(
+  id=Id,
   lastname=LastName, 
   firstname = FirstName, 
   Pos = Position, 
@@ -94,7 +98,7 @@ def_dk_filtered = DK_DF %>%  filter(Pos == 'DST')
 merged_def = left_join(def_dk_filtered, def_player_filtered, by='Team')
 
 # select only relevant columns after merging tables
-merged_def = merged_def %>% select(lastname.x, firstname.x, Team, Pos.x, Salary, Proj_Points, roll_average_points)
+merged_def = merged_def %>% select(id, lastname.x, firstname.x, Team, Pos.x, Salary, Proj_Points, roll_average_points)
 
 # Filter out defensive player data from main data frame in order to merge regulat player data
 player_filtered = player_proj %>%  filter(Pos != 'DST')
@@ -102,7 +106,7 @@ dk_filtered = DK_DF %>%  filter(Pos != 'DST')
 
 # Merge tables on Name and Position
 merged = left_join(dk_filtered, player_filtered, by= c("lastname", "firstname", "Pos"))
-merged = merged %>% select(lastname, firstname, Team.x, Pos, Salary, Proj_Points, roll_average_points)
+merged = merged %>% select(id, lastname, firstname, Team.x, Pos, Salary, Proj_Points, roll_average_points)
 
 colnames(merged)[colnames(merged) == 'Team.x'] = 'Team'
 colnames(merged_def)[colnames(merged_def) == 'lastname.x'] = 'lastname'
@@ -112,10 +116,8 @@ colnames(merged_def)[colnames(merged_def) == 'Pos.x'] = 'Pos'
 df_full = rbind(merged, merged_def)
 
 df_full[is.na(df_full)] = 0
-<<<<<<< HEAD
-=======
 df_full[df_full == -Inf] <- 0
->>>>>>> 2236765c964a17e1955a111fb3164a24bc9aa194
+
 
 write.table(df_full, "df_full.csv", sep=",")
 

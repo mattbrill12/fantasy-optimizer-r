@@ -9,11 +9,18 @@
 
 library(lpSolve)
 
-runOptimizer <- function() {
+runOptimizer <- function(excludes = list(c('id'))) {
   
   #Read in dataset
   dataset<-read.csv("df_full.csv", stringsAsFactors = FALSE)
   
+  #
+  # remove excludes from dataset
+  #
+  # dataset[!dataset$id %in% excludes$id]
+  dataset <- tail(dataset, -5)
+  print(nrow(dataset))
+
   
   #Change variables to appropriate types
   dataset$Pos <- as.factor(dataset$Pos)
