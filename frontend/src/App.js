@@ -59,7 +59,16 @@ function App() {
         setFilters(filters);
 
         if (isChecked) {
-            let filtered = originalPlayers.filter(player => player.position.toLowerCase() === position.toLowerCase());
+            let filtered = []
+            Object.keys(filters).forEach(filter => {
+                if (filter || filter === position)
+                    filtered.push(
+                        ...originalPlayers.filter(player => player.position === position)
+                    );
+
+            });
+
+            console.log(filtered)
             setPlayers(filtered)
         }
 
@@ -96,6 +105,10 @@ function App() {
                                     )}
 
                                 </Form>
+                                <div className="d-flex flex-row-reverse">
+                                    <p>{players.length} players</p>
+                                </div>
+
                             </div>
 
                             <Lineup players={players} />
@@ -103,7 +116,7 @@ function App() {
                     </Col>
                     <Col md={9}>
                         <div className="main">
-                            <h1>Linear Programming Solver</h1>
+                            <h4>Linear Programming Solver</h4>
                             <Tabs
                                 id="controlled-tab-example"
                                 activeKey={optimizerKey}
@@ -118,7 +131,7 @@ function App() {
                                     <p className="invalid">Error loading running average projections</p>
                                 </Tab>
                             </Tabs>
-                            <h1>Random Walk Generator</h1>
+                            <h4>Random Walk Generator</h4>
                             <Tabs
                                 id="controlled-tab-example"
                                 activeKey={generatorKey}
