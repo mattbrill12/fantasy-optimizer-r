@@ -19,5 +19,9 @@ body {
 }
 
 .player-card {
-    
+    width: 250px;
+}
+
+.player-card.compact {
+    min-width: 250px;
 }

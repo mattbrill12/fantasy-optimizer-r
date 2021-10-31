@@ -54,7 +54,6 @@ function(req) {
 #* @param The text to be echoed in the response
 #* @get /generated-lineup/dk
 function(numTrials=10) {
-  print(numTrials)
   dataset <- read.csv("df_full.csv", stringsAsFactors = FALSE)
   lineup <- random_walk(dataset, numTrials)
   df = data.frame(lineup)
@@ -65,7 +64,6 @@ function(numTrials=10) {
 #* @param The text to be echoed in the response
 #* @get /generated-lineup/runAvg
 function(numTrials=10) {
-  print(numTrials)
   dataset <- read.csv("df_full.csv", stringsAsFactors = FALSE)
   lineup <- random_walk_alt(dataset, numTrials)
   df = data.frame(lineup)
