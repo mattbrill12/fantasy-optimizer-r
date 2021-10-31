@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
 
 import './App.css';
@@ -20,15 +21,48 @@ function App() {
     const [optimizerKey, setOptimizerKey] = useState(lineupTypes.optimizers.dk);
     const [generatorKey, setGeneratorKey] = useState(lineupTypes.generators.dk);
     const [players, setPlayers] = useState([]);
+    const [originalPlayers, setOriginalPlayers] = useState([]);
     const [positions, setPositions] = useState([]);
+    const [filters, setFilters] = useState({});
 
     useEffect(() => {
         loadData()
     }, [])
 
     function loadData() {
-        getPositions().then(p => setPositions(p));
-        getDraftables().then(p => setPlayers(p));
+        getPositions().then(pos => {
+            setPositions(pos);
+            let _filters = {}
+            pos.forEach(p => { _filters[p] = false });
+            setFilters(_filters);
+        });
+        getDraftables().then(players => {
+            setPlayers(players);
+            setOriginalPlayers(players);
+        });
+    }
+
+    function handleSearchFilterChange(e) {
+        let searchString = e.target.value.trim().toLowerCase()
+
+        if (searchString) {
+            let filtered = originalPlayers.filter(player => player.name.toLowerCase().includes(e.target.value))
+            setPlayers(filtered);
+        }
+        else
+            setPlayers(originalPlayers)
+    }
+
+    function handlePositionFilterChange(e, position) {
+        const isChecked = e.target.checked;
+        filters[position] = isChecked;
+        setFilters(filters);
+
+        if (isChecked) {
+            let filtered = originalPlayers.filter(player => player.position.toLowerCase() === position.toLowerCase());
+            setPlayers(filtered)
+        }
+
     }
 
     return (
@@ -43,7 +77,25 @@ function App() {
                             <h4>Week 7</h4>
 
                             <div>
-                                {positions && positions.map((p, i) => <a key={i} className="p-2" > {p}</a>)}
+                                <Form>
+                                    <Form.Group className="mb-3" controlId="searchPlayers">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="search players"
+                                            onChange={handleSearchFilterChange} />
+                                    </Form.Group>
+
+                                    {positions && positions.map(p =>
+                                        <Form.Check
+                                            type="checkbox"
+                                            onChange={(e) => handlePositionFilterChange(e, p)}
+                                            label={p}
+                                            inline
+                                            id={p}
+                                        />
+                                    )}
+
+                                </Form>
                             </div>
 
                             <Lineup players={players} />

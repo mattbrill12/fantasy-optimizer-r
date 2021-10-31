@@ -14,7 +14,6 @@ export function getOptimizedLineup(type, excludes = []) {
     let url = `${baseUrl}/optimized-lineup/${type}`;
     return axios.post(url, excludes).then(({ data }) => {
         let result = {}
-        console.log(data)
         result.draftables = formatData(data)
         result.totalValue = data.Proj_Points.reduce((a, b) => a + b)
         result.totalSalary = data.Salary.reduce((a, b) => a + b)
