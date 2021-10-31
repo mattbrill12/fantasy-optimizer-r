@@ -17,13 +17,9 @@ runOptimizer <- function(excludes = list()) {
   #
   # remove excludes from dataset
   #
-  # print(excludes)
-  print(nrow(excludes))
-  print(nrow(dataset))
   if (length(excludes) > 1) {
     dataset <- anti_join(dataset, excludes, by="id")
   }
-  print(nrow(dataset))
 
   # 
   #Change variables to appropriate types
