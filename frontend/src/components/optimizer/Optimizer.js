@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import Lineup from "../lineup/Lineup";
 import { getOptimizedLineup } from '../../services/apiService';
@@ -28,7 +29,7 @@ function Optimizer({ type }) {
     return (
         <div className="solutions-container">
             <div className="row">
-                <div className="col">
+                <div className="col-8">
                     <div className="row">
                         <div className="col">
                             <label>Total Salary</label>
@@ -40,7 +41,7 @@ function Optimizer({ type }) {
                         </div>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col-4">
                     <div className="d-flex flex-row-reverse">
                         <div>
                             <Button
@@ -55,7 +56,11 @@ function Optimizer({ type }) {
                                 )}
                             </ul>
                         </div>
-
+                        {/* <div>
+                            <Button>
+                                <FaBookmark />
+                            </Button>
+                        </div> */}
                     </div>
                 </div>
             </div>

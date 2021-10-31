@@ -26,6 +26,7 @@ function App() {
     const [positions, setPositions] = useState([]);
     const [filters, setFilters] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [savedLineup, setSavedLineup] = useState([]);
 
     useEffect(() => {
         loadData()
@@ -75,6 +76,21 @@ function App() {
 
     }
 
+    function renderSkeleton() {
+        let rows = [];
+
+        for (let i = 0; i < 5; i++) {
+            rows.push(
+                <div className="row">
+                    <div className="col-3"><Skeleton circle height="35%" /></div>
+                    <div className="col-9"><Skeleton count={5} /></div>
+                </div>
+            );
+
+        }
+        return <div>{rows}</div>;
+    }
+
     return (
         <div className="App">
 
@@ -114,10 +130,7 @@ function App() {
                                 {!isLoading ?
                                     <Lineup players={players} />
                                     :
-                                    <div>
-                                        <Skeleton count={5} />
-                                        <Skeleton count={5} />
-                                    </div>
+                                    renderSkeleton()
                                 }
 
                             </div>

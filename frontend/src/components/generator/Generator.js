@@ -36,7 +36,7 @@ function Generator({ type }) {
     return (
         <div>
             <div className="row">
-                <div className="col">
+                <div className="col-8">
                     <div className="row">
                         <div className="col">
                             <label>Total Salary</label>
@@ -48,7 +48,7 @@ function Generator({ type }) {
                         </div>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col-4">
                     <div className="d-flex flex-row-reverse">
                         <InputGroup className="mb-3">
                             <FormControl
