@@ -21,13 +21,13 @@ random_walk <- function(x, trials) {
       team = rbind(qb, rb, wr, te, dst, flex)
   
       team_total = sum(team$Proj_Points)
+      team_salary = sum(team$Salary)
       max_total = sum(max_val_team$Proj_Points)
   
-      if (team_total > max_total) {
+      if (team_total > max_total & team_salary <= 50000) {
         max_val_team = team
       }
   }
   return(max_val_team)
 }
-
 

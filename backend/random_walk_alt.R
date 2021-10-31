@@ -21,19 +21,13 @@ random_walk_alt <- function(x, trials) {
       team = rbind(qb, rb, wr, te, dst, flex)
   
       team_total = sum(team$roll_average_points)
+      team_salary = sum(team$Salary)
       max_total = sum(max_val_team$roll_avg_points)
       
-      if (team_total > max_total) {
+      if (team_total > max_total & team_salary <= 50000) {
         max_val_team = team
       }
   }
   return(max_val_team)
 }
 
-
-# r_walk = random_walk(data, 1000)
-# print(r_walk)
-# r_walk = random_walk(data, 10)
-# r_walk
-
-#write.table(r_walk, "r_walk_data.csv", sep=",")
