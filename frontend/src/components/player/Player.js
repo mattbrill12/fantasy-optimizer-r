@@ -27,7 +27,7 @@ function Player(player) {
     return (
         <div className="player-card">
             {!isLoading ?
-                <Card className="m-2" border="dark" bg="#info" onClick={handleClick}>
+                <Card className="m-2" border="dark" onClick={handleClick}>
                     <Card.Img variant="top" src={image} />
                     <Card.Body>
                         <div className="d-flex mb-2">

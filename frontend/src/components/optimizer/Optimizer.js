@@ -5,14 +5,14 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Lineup from "../lineup/Lineup";
 import { getOptimizedLineup } from '../../services/apiService';
 
-function Optimizer({ type }) {
+function Optimizer({ type, sport }) {
 
     const [results, setResults] = useState([]);
     const [excludes, setExcludes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        loadData(type);
+        if (sport === 'NFL') loadData(type);
     }, [])
 
     async function loadData(type, excludes) {
@@ -50,11 +50,15 @@ function Optimizer({ type }) {
                                 onClick={() => loadData(type, excludes)}>
                                 Optimize
                             </Button>
-                            <ul>
-                                {excludes && excludes.map((player, index) =>
-                                    <li key={index}>{player.name}</li>
-                                )}
-                            </ul>
+                            <div>
+                                <label>Excluded players</label>
+                                <ul>
+                                    {excludes && excludes.map((player, index) =>
+                                        <li key={index}>{player.name}</li>
+                                    )}
+                                </ul>
+                            </div>
+
                         </div>
                         {/* <div>
                             <Button>
