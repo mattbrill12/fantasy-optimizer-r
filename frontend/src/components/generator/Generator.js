@@ -11,36 +11,40 @@ function Generator({ type }) {
 
     const [results, setResults] = useState([]);
     const [numTrials, setNumTrials] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        loadData(type)
+        loadData(type);
     }, [])
 
     async function loadData(type) {
         const result = await getGeneratedLineup(type, numTrials);
-        setResults(result)
+        setResults(result);
+        setIsLoading(false)
     }
 
     function handleUpdate() {
-        setResults([])
+        setResults([]);
+        setIsLoading(true);
         getGeneratedLineup(type, numTrials).then(resp => {
-            setResults(resp)
+            setResults(resp);
+            setIsLoading(false);
         });
 
     }
 
     return (
-        <>
+        <div>
             <div className="row">
                 <div className="col">
                     <div className="row">
                         <div className="col">
                             <label>Total Salary</label>
-                            <h3>${results.totalSalary}</h3>
+                            <h4>${results.totalSalary}</h4>
                         </div>
                         <div className="col">
                             <label>Total Projected Points</label>
-                            <h3>{results.totalValue && results.totalValue.toFixed(2)}</h3>
+                            <h4>{results.totalValue && results.totalValue.toFixed(2)}</h4>
                         </div>
                     </div>
                 </div>
@@ -64,8 +68,11 @@ function Generator({ type }) {
                 </div>
             </div>
 
-            <Lineup players={results.draftables} horizontal />
-        </>
+            <Lineup
+                isLoading={isLoading}
+                players={results.draftables}
+                horizontal />
+        </div>
     )
 }
 

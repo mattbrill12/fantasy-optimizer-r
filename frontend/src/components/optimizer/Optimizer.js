@@ -8,6 +8,7 @@ function Optimizer({ type }) {
 
     const [results, setResults] = useState([]);
     const [excludes, setExcludes] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         loadData(type);
@@ -15,25 +16,27 @@ function Optimizer({ type }) {
 
     async function loadData(type, excludes) {
         setResults([]);
+        setIsLoading(true);
         const result = await getOptimizedLineup(type, excludes);
         setResults(result);
+        setIsLoading(false);
     }
 
     function handleExclude(player) {
         setExcludes([...excludes, player])
     }
     return (
-        <>
+        <div className="solutions-container">
             <div className="row">
                 <div className="col">
                     <div className="row">
                         <div className="col">
                             <label>Total Salary</label>
-                            <h3>${results.totalSalary}</h3>
+                            <h4>${results.totalSalary}</h4>
                         </div>
                         <div className="col">
                             <label>Total Projected Points</label>
-                            <h3>{results.totalValue && results.totalValue.toFixed(2)}</h3>
+                            <h4>{results.totalValue && results.totalValue.toFixed(2)}</h4>
                         </div>
                     </div>
                 </div>
@@ -60,11 +63,12 @@ function Optimizer({ type }) {
 
 
             <Lineup
+                isLoading={isLoading}
                 players={results.draftables}
                 horizontal
                 handleExclude={handleExclude}
             />
-        </>
+        </div>
     )
 }
 

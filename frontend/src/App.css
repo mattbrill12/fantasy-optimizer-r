@@ -1,9 +1,23 @@
 body {
-    background-color: #FBFBFB !important;
+    background-color: #d8d8d8 !important;
     padding-top:75px;
+}
+
+.side {
+    background-color: white;
 }
 
 .draftable-players {
     height: calc(100vh - 350px);
     overflow: scroll;
+}
+
+.solutions-container {
+    background-color: white;
+    margin-bottom: 30px;
+    min-height: 350px;
+}
+
+.player-card {
+    
 }

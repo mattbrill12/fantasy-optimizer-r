@@ -5,9 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from 'react-loading-skeleton';
 
-import './App.css';
 import Optimizer from './components/optimizer/Optimizer';
 import Generator from './components/generator/Generator';
 import Header from './components/header/Header';
@@ -15,6 +14,8 @@ import Lineup from './components/lineup/Lineup';
 import lineupTypes from './shared/constants/lineup-types';
 import { getDraftables, getPositions } from './services/apiService';
 
+import 'react-loading-skeleton/dist/skeleton.css';
+import './App.css';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
     const [originalPlayers, setOriginalPlayers] = useState([]);
     const [positions, setPositions] = useState([]);
     const [filters, setFilters] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         loadData()
@@ -39,6 +41,7 @@ function App() {
         getDraftables().then(players => {
             setPlayers(players);
             setOriginalPlayers(players);
+            setIsLoading(false);
         });
     }
 
@@ -81,8 +84,8 @@ function App() {
                 <Row>
                     <Col md={3}>
                         <div className="side p-2">
-                            <h4>Week 7</h4>
-                            <div className="sticky">
+                            <div className="sticky px-2 pt-2">
+                                <h4 className="mb-4">Week 7</h4>
                                 <Form>
                                     <Form.Group className="mb-3" controlId="searchPlayers">
                                         <Form.Control
@@ -105,44 +108,59 @@ function App() {
                                 <div className="d-flex flex-row-reverse">
                                     <p>{players.length} players</p>
                                 </div>
-
                             </div>
+
                             <div className="draftable-players">
-                                <Lineup players={players} />
+                                {!isLoading ?
+                                    <Lineup players={players} />
+                                    :
+                                    <div>
+                                        <Skeleton count={5} />
+                                        <Skeleton count={5} />
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </Col>
                     <Col md={9}>
-                        <div className="main p-2">
-                            <h4>Linear Programming Solver</h4>
-                            <Tabs
-                                id="controlled-tab-example"
-                                activeKey={optimizerKey}
-                                onSelect={(k) => setOptimizerKey(k)}
-                                className="mb-3"
-                            >
-                                <Tab eventKey={lineupTypes.optimizers.dk} title="Draft Kings Projections">
-                                    <Optimizer type={lineupTypes.optimizers.dk} />
-                                </Tab>
-                                <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Average Projections">
-                                    {/* <Optimizer type={lineupTypes.optimizers.runAvg} /> */}
-                                    <p className="invalid">Error loading running average projections</p>
-                                </Tab>
-                            </Tabs>
-                            <h4>Random Walk Generator</h4>
-                            <Tabs
-                                id="controlled-tab-example"
-                                activeKey={generatorKey}
-                                onSelect={(k) => setGeneratorKey(k)}
-                                className="mb-3"
-                            >
-                                <Tab eventKey={lineupTypes.generators.dk} title="Draft Kings Projections">
-                                    <Generator type={lineupTypes.generators.dk} optimizer={false} />
-                                </Tab>
-                                <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average Projections">
-                                    <Generator type={lineupTypes.generators.runAvg} optimizer={false} />
-                                </Tab>
-                            </Tabs>
+                        <div className="main">
+
+                            <div className="solutions-container p-4">
+                                <h4 className="mb-4">Linear Programming Solver</h4>
+                                <Tabs
+                                    id="controlled-tab-example"
+                                    activeKey={optimizerKey}
+                                    onSelect={(k) => setOptimizerKey(k)}
+                                    className="mb-3"
+                                >
+                                    <Tab eventKey={lineupTypes.optimizers.dk} title="Draft Kings Projections">
+                                        <Optimizer type={lineupTypes.optimizers.dk} />
+                                    </Tab>
+                                    <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Average Projections">
+                                        {/* <Optimizer type={lineupTypes.optimizers.runAvg} /> */}
+                                        <p className="invalid">Error loading running average projections</p>
+                                    </Tab>
+                                </Tabs>
+                            </div>
+
+                            <div className="solutions-container p-4">
+                                <h4 className="mb-4">Random Walk Generator</h4>
+                                <Tabs
+                                    id="controlled-tab-example"
+                                    activeKey={generatorKey}
+                                    onSelect={(k) => setGeneratorKey(k)}
+                                    className="mb-3"
+                                >
+                                    <Tab eventKey={lineupTypes.generators.dk} title="Draft Kings Projections">
+                                        <Generator type={lineupTypes.generators.dk} optimizer={false} />
+                                    </Tab>
+                                    <Tab eventKey={lineupTypes.generators.runAvg} title="Running Average Projections">
+                                        <Generator type={lineupTypes.generators.runAvg} optimizer={false} />
+                                    </Tab>
+                                </Tabs>
+                            </div>
+
                         </div>
                     </Col>
                 </Row>
