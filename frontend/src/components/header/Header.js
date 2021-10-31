@@ -1,14 +1,18 @@
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
+
 function Header() {
     return (
-        <>
-            <nav className="navbar navbar-default navbar-fixed-top navbar-inverse navbar-light bg-light">
-                <div className="container">
-                    <a className="navbar-brand" href="#">Fantasy Lineup Optimizer</a>
-                    <a className="active" href="#">NFL</a>
-                    <a className="" href="#">NBA</a>
-                </div>
-            </nav>
-        </>
+        <Navbar bg="dark" variant="dark" fixed="top">
+            <Container>
+                <Navbar.Brand href="#home">Fantasy Lineup Optimizer</Navbar.Brand>
+                <Nav className="me-auto">
+                    <Nav.Link href="#home">NFL</Nav.Link>
+                    <Nav.Link href="#features">NBA</Nav.Link>
+                </Nav>
+            </Container>
+        </Navbar>
     )
 }
 

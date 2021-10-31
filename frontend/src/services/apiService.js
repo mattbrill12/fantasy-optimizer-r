@@ -64,7 +64,6 @@ const formatDraftables = data => {
             position: x.position,
             value: parseInt(x.draftStatAttributes[0].value),
             team: x.teamAbbreviation
-
         }
     })
 

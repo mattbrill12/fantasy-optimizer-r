@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import './App.css';
 import Optimizer from './components/optimizer/Optimizer';
@@ -67,8 +67,6 @@ function App() {
                     );
 
             });
-
-            console.log(filtered)
             setPlayers(filtered)
         }
 
@@ -82,10 +80,9 @@ function App() {
             <Container>
                 <Row>
                     <Col md={3}>
-                        <div className="side" style={{ height: '100vh', overflow: 'scroll' }}>
+                        <div className="side p-2">
                             <h4>Week 7</h4>
-
-                            <div>
+                            <div className="sticky">
                                 <Form>
                                     <Form.Group className="mb-3" controlId="searchPlayers">
                                         <Form.Control
@@ -96,6 +93,7 @@ function App() {
 
                                     {positions && positions.map(p =>
                                         <Form.Check
+                                            key={p}
                                             type="checkbox"
                                             onChange={(e) => handlePositionFilterChange(e, p)}
                                             label={p}
@@ -103,19 +101,19 @@ function App() {
                                             id={p}
                                         />
                                     )}
-
                                 </Form>
                                 <div className="d-flex flex-row-reverse">
                                     <p>{players.length} players</p>
                                 </div>
 
                             </div>
-
-                            <Lineup players={players} />
+                            <div className="draftable-players">
+                                <Lineup players={players} />
+                            </div>
                         </div>
                     </Col>
                     <Col md={9}>
-                        <div className="main">
+                        <div className="main p-2">
                             <h4>Linear Programming Solver</h4>
                             <Tabs
                                 id="controlled-tab-example"

@@ -33,10 +33,16 @@ function Generator({ type }) {
         <>
             <div className="row">
                 <div className="col">
-                    <label>Total Salary</label>
-                    <p>{results.totalSalary}</p>
-                    <label>Total Projected Points</label>
-                    <p>{results.totalValue}</p>
+                    <div className="row">
+                        <div className="col">
+                            <label>Total Salary</label>
+                            <h3>${results.totalSalary}</h3>
+                        </div>
+                        <div className="col">
+                            <label>Total Projected Points</label>
+                            <h3>{results.totalValue && results.totalValue.toFixed(2)}</h3>
+                        </div>
+                    </div>
                 </div>
                 <div className="col">
                     <div className="d-flex flex-row-reverse">

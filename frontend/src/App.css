@@ -1,4 +1,9 @@
 body {
-    background-color: #FBFBFB
-    !important;
+    background-color: #FBFBFB !important;
+    padding-top:75px;
+}
+
+.draftable-players {
+    height: calc(100vh - 350px);
+    overflow: scroll;
 }
