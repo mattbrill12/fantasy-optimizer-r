@@ -6,7 +6,6 @@ Lineup Optimizer for Fantasy Sports
 - R as REST API and for EDA
 - Nodejs Express server as middleware to solve for CORS issue
 
-
 # Frontend
 - ReactJS web app
 - Bootstrap css library
@@ -24,7 +23,6 @@ npm start
     - Histogram of random generated lineups
     - random generator vs lp solver for past weeks
     - draft kings vs our projection over 5 weeks,
-
 
 # NICE TO HAVE
 - NBA tab
@@ -56,7 +54,7 @@ Proj_Points: Points projections for each player provided by DraftKings for each 
 
 Average.DK.Points: Average points for each player taking their total points for the season divided by games played. Historical data from past performances was web scraped from a third party website http://rotoguru1.com/cgi-bin/fyday.pl?game=fd
 
-### File Description and Instructions
+### File Description and Instructions (pre-setup)
 
 Step #1 - run rotoscrape_football.py : File used to webscrape data and export data to csv
 
@@ -69,3 +67,14 @@ Step #3 DK_player_data.R : File used to read in and clean data from DraftKings A
 optimizer.R : Script for linear programing solver. Accepts data frame of all player data and outputs the optimal lineup
 
 random_walk.R : Script for random lineup generation. Randomly picks players from inputted data frame to generate lineups. Trials are manually input by the user and best result from all trials is returned.
+
+# App Startup
+- cd into /backend
+- run api.R
+- IMPORTANT - get port number of R server to forward from Express server and assign it to apiPort variable
+- run npm install
+- run node proxy-api
+- cd into /frontend
+
+    
+

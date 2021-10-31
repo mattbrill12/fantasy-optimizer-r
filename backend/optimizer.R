@@ -9,7 +9,7 @@
 
 library(lpSolve)
 
-runOptimizer <- function(excludes = list(c('id'))) {
+runOptimizer <- function(excludes = list()) {
   
   #Read in dataset
   dataset<-read.csv("df_full.csv", stringsAsFactors = FALSE)
@@ -18,14 +18,14 @@ runOptimizer <- function(excludes = list(c('id'))) {
   # remove excludes from dataset
   #
   # print(excludes)
-  # print(nrow(excludes))
-  # print(nrow(dataset))
-  # if (!is.null(excludes)) {
-  #   dataset <- anti_join(dataset, excludes, by="id")  
-  # }
-  # print(nrow(dataset))
+  print(nrow(excludes))
+  print(nrow(dataset))
+  if (length(excludes) > 1) {
+    dataset <- anti_join(dataset, excludes, by="id")
+  }
+  print(nrow(dataset))
 
-  
+  # 
   #Change variables to appropriate types
   dataset$Pos <- as.factor(dataset$Pos)
   #dataset$Salary <-as.numeric(dataset$Salary)
