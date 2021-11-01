@@ -18,15 +18,6 @@ npm start
 
 # TODO
 - dockerize R api to run on static port instead
-- client hit optimizer/generator instead of readign from CSV
-- PRESENTATION
-    - intro page
-    - Skeleton of slides
-- Finish cleaning data
-- plots/charts
-    - Histogram of random generated lineups
-    - random generator vs lp solver for past weeks
-    - draft kings vs our projection over 5 weeks,
 
 # NICE TO HAVE
 - NBA tab
