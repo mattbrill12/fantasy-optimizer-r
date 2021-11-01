@@ -73,9 +73,10 @@ random_walk.R : Script for random lineup generation. Randomly picks players from
     - IMPORTANT - get port number of R server to forward from Express server and assign it to `apiPort` variable in `proxy-api.js`
 - run `npm install`
 - run `node proxy-api`
-- cd into /frontend
-    -  run `npm install`
-    -  run `npm start`
+- go into frontend folder
+    - `cd ../frontend`
+    - run `npm install`
+    - run `npm start`
 
     
 
