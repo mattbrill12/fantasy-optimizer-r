@@ -7,14 +7,14 @@ import Lineup from "../lineup/Lineup";
 import { useEffect, useState } from 'react';
 import { getGeneratedLineup } from '../../services/apiService';
 
-function Generator({ type }) {
+function Generator({ type, sport }) {
 
     const [results, setResults] = useState([]);
     const [numTrials, setNumTrials] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        loadData(type);
+        if (sport === 'NFL') loadData(type);
     }, [])
 
     async function loadData(type) {

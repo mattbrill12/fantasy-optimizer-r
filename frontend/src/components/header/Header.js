@@ -6,10 +6,10 @@ function Header() {
     return (
         <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand href="#home">Fantasy Lineup Optimizer</Navbar.Brand>
+                <Navbar.Brand href="/">Fantasy Lineup Optimizer</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="#home">NFL</Nav.Link>
-                    <Nav.Link href="#features">NBA</Nav.Link>
+                    <Nav.Link href="/solutions/NFL">NFL</Nav.Link>
+                    <Nav.Link href="/solutions/NBA">NBA</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
