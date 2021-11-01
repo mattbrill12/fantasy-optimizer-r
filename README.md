@@ -67,12 +67,15 @@ optimizer.R : Script for linear programing solver. Accepts data frame of all pla
 random_walk.R : Script for random lineup generation. Randomly picks players from inputted data frame to generate lineups. Trials are manually input by the user and best result from all trials is returned.
 
 # App Startup
-- cd into /backend
-- run api.R
-- IMPORTANT - get port number of R server to forward from Express server and assign it to apiPort variable
-- run npm install
-- run node proxy-api
+- go into backend folder
+    - `cd /backend`
+- run api.R and `run api`
+    - IMPORTANT - get port number of R server to forward from Express server and assign it to `apiPort` variable in `proxy-api.js`
+- run `npm install`
+- run `node proxy-api`
 - cd into /frontend
+    -  run `npm install`
+    -  run `npm start`
 
     
 
