@@ -40,11 +40,11 @@ function Generator({ type, sport }) {
                     <div className="row">
                         <div className="col">
                             <label>Total Salary</label>
-                            <h4>${results.totalSalary}</h4>
+                            <h4 className="result-value">${results.totalSalary}</h4>
                         </div>
                         <div className="col">
                             <label>Total Projected Points</label>
-                            <h4>{results.totalValue && results.totalValue.toFixed(2)}</h4>
+                            <h4 className="result-value">{results.totalValue && results.totalValue.toFixed(2)}</h4>
                         </div>
                     </div>
                 </div>

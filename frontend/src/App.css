@@ -18,10 +18,32 @@ body {
     min-height: 350px;
 }
 
-.player-card {
+
+.lineup > .player-card {
     width: 250px;
 }
 
 .player-card.compact {
     min-width: 250px;
+}
+
+.result-value {
+    color: green;
+}
+
+.nav-link {
+    color: #d8d8d8 !important;
+}
+
+.nav-link.active {
+    color: black !important;
+}
+
+.player-skeleton {
+    width: 75px;
+}
+
+.sport-logo {
+    height: 250px;
+    object-fit: contain;
 }
