@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 import Optimizer from '../../components/optimizer/Optimizer';
 import Generator from '../../components/generator/Generator';
-import Lineup from '../../components/lineup/Lineup';
+import Player from '../../components/player/Player';
 import lineupTypes from '../../shared/constants/lineup-types';
 import { getDraftables, getPositions, getNBADraftables } from '../../services/apiService';
 
@@ -45,6 +45,11 @@ function Solutions() {
                 setIsLoading(false);
             });
         } else {
+            let positions = ['PG', 'SG', 'PF', 'SF', 'C'];
+            setPositions(positions)
+            let _filters = {}
+            positions.forEach(p => { _filters[p] = false });
+            setFilters(_filters);
             getNBADraftables().then(players => {
                 setPlayers(players);
                 setOriginalPlayers(players);
@@ -70,16 +75,19 @@ function Solutions() {
         filters[position] = isChecked;
         setFilters(filters);
 
-        if (isChecked) {
-            let filtered = []
-            Object.keys(filters).forEach(filter => {
-                if (filter || filter === position)
-                    filtered.push(
-                        ...originalPlayers.filter(player => player.position === position)
-                    );
+        let filtered = [];
+        let filterWith = [];
+        let keys = Object.keys(filters);
+        for (let position in filters) {
+            if (filters[position])
+                filterWith.push(position);
+        }
 
-            });
-            setPlayers(filtered)
+        if (filterWith.length) {
+            filtered = originalPlayers.filter(p => filterWith.includes(p.position))
+            setPlayers(filtered);
+        } else {
+            setPlayers(originalPlayers);
         }
 
     }
@@ -90,8 +98,14 @@ function Solutions() {
         for (let i = 0; i < 5; i++) {
             rows.push(
                 <div className="row">
-                    <div className="col-3"><Skeleton circle height="35%" /></div>
-                    <div className="col-9"><Skeleton count={5} /></div>
+                    <div className="d-flex">
+                        <div className="col-3 p-2"><Skeleton circle height="50px" /></div>
+                        <div className="col-9"><Skeleton count={3} /></div>
+
+                    </div>
+                    <div>
+                        <Skeleton count={3} />
+                    </div>
                 </div>
             );
 
@@ -103,10 +117,15 @@ function Solutions() {
         <>
             <Container>
                 <Row>
+                    <Col>
+                        <h1 className="p-2">{sport}</h1>
+                    </Col>
+                </Row>
+                <Row>
                     <Col md={3}>
                         <div className="side p-2">
                             <div className="sticky px-2 pt-2">
-                                <h4 className="mb-4">Week 7</h4>
+                                <h4 className="mb-4">Week 8</h4>
                                 <Form>
                                     <Form.Group className="mb-3" controlId="searchPlayers">
                                         <Form.Control
@@ -133,11 +152,10 @@ function Solutions() {
 
                             <div className="draftable-players">
                                 {!isLoading ?
-                                    <Lineup players={players} />
+                                    players && players.map(p => <Player key={p.id} {...p} />)
                                     :
                                     renderSkeleton()
                                 }
-
                             </div>
                         </div>
                     </Col>
@@ -156,7 +174,7 @@ function Solutions() {
                                         <Optimizer type={lineupTypes.optimizers.dk} sport={sport} />
                                     </Tab>
                                     <Tab eventKey={lineupTypes.optimizers.runAvg} title="Running Average Projections">
-                                        {/* <Optimizer type={lineupTypes.optimizers.runAvg} sport={sport}/> */}
+                                        {/* <Optimizer type={lineupTypes.optimizers.runAvg} sport={sport} /> */}
                                         <p className="invalid">Error loading running average projections</p>
                                     </Tab>
                                 </Tabs>

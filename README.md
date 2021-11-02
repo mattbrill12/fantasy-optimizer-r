@@ -5,36 +5,47 @@ This project analyzes weekly fantasy football data for the DraftKings platform. 
 
 This project seeks to optimize lineup selection in order to maximize points for a future contest. Forecasts for points are done in 2 ways. The first is a rolling average of points for each player, taking the total points for the season divided by games played. This method assumes a player is most likely to perform at their average in future weeks. The second method takes the points projection for each player from the DraftKings platform. 
 
-# Backend 
+## Backend 
 - Python for scraping
 - R as REST API and for EDA
 - Nodejs Express server as middleware to solve for CORS issue
 
-# Frontend
+## Frontend
 - ReactJS web app
 - Bootstrap css library
-npm install
-npm start
 
-# TODO
+## TODO
 - dockerize R api to run on static port instead
-- client hit optimizer/generator instead of readign from CSV
-- PRESENTATION
-    - intro page
-    - Skeleton of slides
-- Finish cleaning data
-- plots/charts
-    - Histogram of random generated lineups
-    - random generator vs lp solver for past weeks
-    - draft kings vs our projection over 5 weeks,
 
-# NICE TO HAVE
+## NICE TO HAVE
 - NBA tab
 
-# FUTURE WORK
+## FUTURE WORK
 - gather past fantasy line ups to train data
-- subscription based
 - generic optimizer for any sport
+
+## File Description and Instructions (pre-setup)
+
+Step #1 - run rotoscrape_football.py : File used to webscrape data and export data to csv
+
+Step #2 - run nfl_value_forecast.py : File used to read in raw webscrape data and assign average points values to each player exports csv
+
+Step #3 DK_player_data.R : File used to read in and clean data from DraftKings API. File also reads in web scraped and reformats both data sources into a single data frame
+
+## Files used by front end app 
+optimizer.R : Script for linear programing solver. Accepts data frame of all player data and outputs the optimal lineup
+
+random_walk.R : Script for random lineup generation. Randomly picks players from inputted data frame to generate lineups. Trials are manually input by the user and best result from all trials is returned.
+
+## App Startup
+- cd into /backend
+- run api.R
+- IMPORTANT - get port number of R server to forward from Express server and assign it to apiPort variable
+- run npm install
+- run node proxy-api
+- cd into /frontend
+
+    
 
 ### Dataset
 
@@ -51,28 +62,3 @@ salary: Virtual dollars required to draft a player for a contest, salaries set b
 Proj_Points: Points projections for each player provided by DraftKings for each contest
 
 Average.DK.Points: Average points for each player taking their total points for the season divided by games played. Historical data from past performances was web scraped from a third party website http://rotoguru1.com/cgi-bin/fyday.pl?game=fd
-
-### File Description and Instructions (pre-setup)
-
-Step #1 - run rotoscrape_football.py : File used to webscrape data and export data to csv
-
-Step #2 - run nfl_value_forecast.py : File used to read in raw webscrape data and assign average points values to each player exports csv
-
-Step #3 DK_player_data.R : File used to read in and clean data from DraftKings API. File also reads in web scraped and reformats both data sources into a single data frame
-
-
-# Files used by front end app 
-optimizer.R : Script for linear programing solver. Accepts data frame of all player data and outputs the optimal lineup
-
-random_walk.R : Script for random lineup generation. Randomly picks players from inputted data frame to generate lineups. Trials are manually input by the user and best result from all trials is returned.
-
-# App Startup
-- cd into /backend
-- run api.R
-- IMPORTANT - get port number of R server to forward from Express server and assign it to apiPort variable
-- run npm install
-- run node proxy-api
-- cd into /frontend
-
-    
-
