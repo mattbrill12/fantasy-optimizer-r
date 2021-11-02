@@ -57,7 +57,7 @@ function Generator({ type, sport }) {
                                 onChange={(e) => setNumTrials(e.target.value)}
                             />
                             <Button
-                                variant="primary"
+                                variant="outline-primary"
                                 id="num-trial-generator"
                                 onClick={handleUpdate}>
                                 Optimize

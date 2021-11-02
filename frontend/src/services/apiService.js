@@ -4,7 +4,7 @@ const baseUrl = 'http://localhost:3001';
 
 export function getNBADraftables() {
     return axios
-        .get('https://api.draftkings.com/draftgroups/v1/draftgroups/58595/draftables?format=json')
+        .get('https://api.draftkings.com/draftgroups/v1/draftgroups/58616/draftables?format=json')
         .then(resp => formatNBADraftables(resp.data));
 }
 

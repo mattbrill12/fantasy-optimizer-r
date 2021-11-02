@@ -6,7 +6,7 @@ const axios = require('axios');
 
 // TODO setup a config file
 ////////////////////////////
-const apiPort = '6213';
+const apiPort = '7549';
 ////////////////////////////
 const baseUrl = `http://localhost:${apiPort}`;
 app.use(express.json());

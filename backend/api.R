@@ -21,7 +21,9 @@ cors <- function(res) {
 #* @param The text to be echoed in the response
 #* @get /draftables
 function() {
-  json_file <- "https://api.draftkings.com/draftgroups/v1/draftgroups/58073/draftables?format=json"
+  
+  # json_file <- "https://api.draftkings.com/draftgroups/v1/draftgroups/58073/draftables?format=json"
+  json_file <- "https://api.draftkings.com/draftgroups/v1/draftgroups/58414/draftables?format=json"
   json_data <- fromJSON(paste(readLines(json_file), collapse=""))
   return(toJSON(json_data$draftables))
 }

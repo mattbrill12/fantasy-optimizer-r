@@ -71,7 +71,7 @@ function Optimizer({ type, sport }) {
                     <div className="d-flex flex-row-reverse">
                         <div>
                             <Button
-                                variant="primary"
+                                variant="outline-primary"
                                 id="optimize"
                                 onClick={() => loadData(type, excludes)}>
                                 Optimize

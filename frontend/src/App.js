@@ -7,6 +7,7 @@ import {
 import Home from './components/home/Home';
 import Solutions from './components/solutions/Solutions';
 import Header from './components/header/Header';
+import Footer from "./components/footer/Footer";
 
 import 'react-loading-skeleton/dist/skeleton.css';
 import './App.css';
@@ -26,6 +27,8 @@ function App() {
                         component={Solutions}
                     />
                 </Switch>
+
+                <Footer />
             </BrowserRouter>
         </div >
     );

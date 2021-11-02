@@ -47,3 +47,8 @@ body {
     height: 250px;
     object-fit: contain;
 }
+
+.footer {
+    margin-top: 100px;
+    background-color: #EEEEEE;
+}
