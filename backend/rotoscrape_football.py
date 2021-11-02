@@ -13,7 +13,7 @@ for plat in platform: # iterate through urls by filling text string
                 url = f'http://rotoguru1.com/cgi-bin/fyday.pl?week={week}&year=20{year}&game={plat}&scsv=1'
                 urls.append(url)
         else:
-            for week in range (1,8):#Since the 2021 season is in progress there is only 7 weeks of data available
+            for week in range (1,9):#Since the 2021 season is in progress there is only 7 weeks of data available
                 url = f'http://rotoguru1.com/cgi-bin/fyday.pl?week={week}&year=20{year}&game={plat}&scsv=1'
                 urls.append(url)
 

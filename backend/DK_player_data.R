@@ -40,7 +40,7 @@ player_proj$Team = gsub('jac', 'jax', player_proj$Team, fixed = T)
 player_proj %>% select(Name, Pos, Team, Games.Played, roll_average_points)
 
 
-json_file <- 'https://api.draftkings.com/draftgroups/v1/draftgroups/58073/draftables?format=json'
+json_file <- 'https://api.draftkings.com/draftgroups/v1/draftgroups/58414/draftables?format=json'
 json_data <- fromJSON(file = json_file)
 
 ## Create empty vectors to fill with Json Data
